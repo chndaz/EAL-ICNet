@@ -16,16 +16,15 @@ To validate the effectiveness and efficiency of the proposed EAL-ICNet, we condu
 
 ### Experimental Setup and Implementation Detail
 (1)Baselines: To comprehensively evaluate the effectiveness of the proposed EAL-ICNet, we compare it with a wide range of representative segmentation models, which can be categorized into two groups: lightweight networks and IC segmentation networks.
-\begin{itemize}
-\item Lightweight networks:
-Several lightweight segmentation models are employed to assess the efficiency and compactness of our method, including IRDPNet~\cite{mazhar2023rethinking}, EDANet~\cite{lo2019efficient}, ContextNet~\cite{poudel2018contextnet}, ESNet~\cite{wang2019esnet}, and LETNet~\cite{xu2023lightweight}. These models are characterized by reduced computational complexity and are widely used in real-time or resource-constrained scenarios. They serve as strong baselines for evaluating the trade-off between segmentation accuracy and inference speed.
 
-\item IC segmentation networks:
-In addition, we involve multiple IC-oriented segmentation approaches for a more domain-specific comparison. These include FCN~\cite{hong2018deep}, UNet~\cite{ronneberger2015u}, HRNet~\cite{yu2022data}, MAnet~\cite{he2022manet}, and EUNet++~\cite{cheng2025segmentation}, all of which have demonstrated strong capability in extracting fine structural details from IC or microscopic images. Among them, EUNet++ adopts a nested dense skip connection structure to enhance multi-scale feature fusion.
+Lightweight networks: Several lightweight segmentation models are employed to assess the efficiency and compactness of our method, including IRDPNet~\cite{mazhar2023rethinking}, EDANet~\cite{lo2019efficient}, ContextNet~\cite{poudel2018contextnet}, ESNet~\cite{wang2019esnet}, and LETNet~\cite{xu2023lightweight}. These models are characterized by reduced computational complexity and are widely used in real-time or resource-constrained scenarios. They serve as strong baselines for evaluating the trade-off between segmentation accuracy and inference speed.
+
+IC segmentation networks: In addition, we involve multiple IC-oriented segmentation approaches for a more domain-specific comparison. These include FCN~\cite{hong2018deep}, UNet~\cite{ronneberger2015u}, HRNet~\cite{yu2022data}, MAnet~\cite{he2022manet}, and EUNet++~\cite{cheng2025segmentation}, all of which have demonstrated strong capability in extracting fine structural details from IC or microscopic images. Among them, EUNet++ adopts a nested dense skip connection structure to enhance multi-scale feature fusion.
 Finally, our proposed EAL-ICNet further integrates multi-scale feature aggregation and lightweight design principles to achieve a better balance between segmentation accuracy and computational efficiency on IC image datasets.
-\end{itemize}
+
 (2)Implementation Details: To ensure a fair comparison with existing studies, the input size of the HY5SYN dataset was uniformly set to $1024 \times 1024$, while the input sizes of the OMC, MIIC, and OMA datasets were adjusted to $512 \times 512$. It is worth noting that our TSSA module employs eight parallel attention heads. The model was optimized using the Adam optimizer, and all experiments were implemented with the PyTorch deep learning framework on an NVIDIA GeForce RTX 4060 Ti GPU with 16 GB of memory.
 In our experiments, the segmentation results were directly generated as probability maps, and the final binary predictions were obtained by applying a threshold of 0.5. All experiments were randomly conducted three times, and the mean and standard deviation of each evaluation metric were recorded.
+
 
 
 ### Training Configuration
