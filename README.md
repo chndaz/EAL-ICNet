@@ -17,7 +17,7 @@ To validate the effectiveness and efficiency of the proposed EAL-ICNet, we condu
 ### Experimental Setup and Implementation Detail
 (1)Baselines: To comprehensively evaluate the effectiveness of the proposed EAL-ICNet, we compare it with a wide range of representative segmentation models, which can be categorized into two groups: lightweight networks and IC segmentation networks.
 
-Lightweight networks: Several lightweight segmentation models are employed to assess the efficiency and compactness of our method, including IRDPNet, EDANet~\cite, ContextNet~\cite, ESNet~\cite, and LETNet. These models are characterized by reduced computational complexity and are widely used in real-time or resource-constrained scenarios. They serve as strong baselines for evaluating the trade-off between segmentation accuracy and inference speed.
+Lightweight networks: Several lightweight segmentation models are employed to assess the efficiency and compactness of our method, including IRDPNet, EDANet, ContextNet, ESNet, and LETNet. These models are characterized by reduced computational complexity and are widely used in real-time or resource-constrained scenarios. They serve as strong baselines for evaluating the trade-off between segmentation accuracy and inference speed.
 
 IC segmentation networks: In addition, we involve multiple IC-oriented segmentation approaches for a more domain-specific comparison. These include FCN, UNet, HRNet, MAnet, and EUNet++, all of which have demonstrated strong capability in extracting fine structural details from IC or microscopic images. Among them, EUNet++ adopts a nested dense skip connection structure to enhance multi-scale feature fusion.
 Finally, our proposed EAL-ICNet further integrates multi-scale feature aggregation and lightweight design principles to achieve a better balance between segmentation accuracy and computational efficiency on IC image datasets.
@@ -25,10 +25,33 @@ Finally, our proposed EAL-ICNet further integrates multi-scale feature aggregati
 (2)Implementation Details: To ensure a fair comparison with existing studies, the input size of the HY5SYN dataset was uniformly set to $1024 \times 1024$, while the input sizes of the OMC, MIIC, and OMA datasets were adjusted to $512 \times 512$. It is worth noting that our TSSA module employs eight parallel attention heads. The model was optimized using the Adam optimizer, and all experiments were implemented with the PyTorch deep learning framework on an NVIDIA GeForce RTX 4060 Ti GPU with 16 GB of memory.
 In our experiments, the segmentation results were directly generated as probability maps, and the final binary predictions were obtained by applying a threshold of 0.5. All experiments were randomly conducted three times, and the mean and standard deviation of each evaluation metric were recorded.
 
-
-
 ### Training Configuration
 
 ### Evaluation Metrics  
+In the experiments, two evaluation metrics were used: Mean Intersection over Union (mIoU) and Mean Pixel Accuracy (MPA), to assess the quality of different networks. mIoU refers to the overlap rate between the generated candidate boxes and the original labeled boxes,~\emph{i.e.}, the intersection over union. A higher mIoU indicates better segmentation results.
+Let $p_{ii}$ denote the number of correctly predicted elements, $p_{ij}$ the number of elements with true label $i$ and predicted label $j$, and $p_{ji}$ the number of elements with true label $j$ and predicted label $i$. Let $k$ represent the number of classes. Then, the Mean Intersection over Union (mIoU) can be expressed as:
+\begin{equation}
+mIoU=\frac{1}{k+1}\sum_{i=0}^{k}\frac{p_{ii}}{\sum_{j=0}^{k}p_{ij}+\sum_{j=0}^{k}p_{ji}-p_{ii}}.
+\end{equation}
+
+Mean Pixel Accuracy (MPA) improves upon pixel accuracy by computing the pixel accuracy for each class individually and then averaging these accuracies across all classes. Let $k$ denote the number of classes, $p_{ii}$ be the total number of pixels with true class $i$ that are predicted as class $i$, and $p_{ij}$ be the total number of pixels with true class $i$ that are predicted as class $j$. MPA can be calculated using the following formula:
+\begin{equation}
+MPA=\frac{1}{k+1}\sum_{i=0}^{k}\frac{p_{ii}}{\sum_{j=0}^{k}p_{ij}}.
+\end{equation}
+
+To further evaluate segmentation quality, we also employ the Dice coefficient (Dice), which measures the similarity between the predicted segmentation and the ground truth. Dice is particularly sensitive to class imbalance, making it suitable for IC segmentation where background pixels dominate. Let $TP$, $FP$, and $FN$ represent the number of true positive, false positive, and false negative pixels, respectively. The Dice coefficient is defined as:
+\begin{equation}
+Dice = \frac{2TP}{2TP + FP + FN}.
+\end{equation}
+A higher Dice score indicates better overlap between prediction and ground truth.
+
+In addition, the Aggregated Jaccard Index (AJI) is adopted as a connected-component-based evaluation metric to assess whether circuit segmentation results exhibit short-circuit or open-circuit issues. Unlike mIoU, which measures pixel-level overlap, AJI evaluates the Jaccard similarity across all connected regions, penalizing both over- and under-segmentation. A higher AJI indicates more accurate separation and connection of metal lines and vias, thus better preserving circuit topology.
+Let $G = {G_1, G_2, \dots, G_n}$ and $S = {S_1, S_2, \dots, S_m}$ represent the sets of ground truth and segmented regions, respectively. For each $G_i$, let $S(G_i)$ denote the segmented region with the highest IoU. Then, the AJI is defined as:
+\begin{equation}
+AJI = \frac{\sum_{i=1}^{n} |G_i \cap S(G_i)|}{\sum_{i=1}^{n} |G_i \cup S(G_i)| + \sum_{k \in U} |S_k|},
+\end{equation}
+where $U$ is the set of unmatched segmented instances. A higher AJI value indicates more accurate instance-level correspondence between prediction and ground truth.
+
+
 
 ## Model Architecture
