@@ -1,6 +1,5 @@
 # EAL-ICNet
-EAL-ICNet, a lightweight segmentation framework, integrates the advantages of both CNNs and Transformers to achieve a strong balance between segmentation accuracy, model compactness, and inference efficiency.EAL-ICNet是一种轻量级的分割框架，它融合了cnn和transformer的优点，在分割精度、模型紧凑性和推理效率之间取得了很好的平衡。
-
+EAL-ICNet, a lightweight segmentation framework, integrates the advantages of both CNNs and Transformers to achieve a strong balance between segmentation accuracy, model compactness, and inference efficiency.
 # Prepare data 
 
 ### Dataset descriptions 
@@ -30,26 +29,32 @@ In our experiments, the segmentation results were directly generated as probabil
 ### Evaluation Metrics  
 In the experiments, two evaluation metrics were used: Mean Intersection over Union (mIoU) and Mean Pixel Accuracy (MPA), to assess the quality of different networks. mIoU refers to the overlap rate between the generated candidate boxes and the original labeled boxes,~\emph{i.e.}, the intersection over union. A higher mIoU indicates better segmentation results.
 Let $p_{ii}$ denote the number of correctly predicted elements, $p_{ij}$ the number of elements with true label $i$ and predicted label $j$, and $p_{ji}$ the number of elements with true label $j$ and predicted label $i$. Let $k$ represent the number of classes. Then, the Mean Intersection over Union (mIoU) can be expressed as:
-\begin{equation}
+
+$$
 mIoU=\frac{1}{k+1}\sum_{i=0}^{k}\frac{p_{ii}}{\sum_{j=0}^{k}p_{ij}+\sum_{j=0}^{k}p_{ji}-p_{ii}}.
-\end{equation}
+$$
 
 Mean Pixel Accuracy (MPA) improves upon pixel accuracy by computing the pixel accuracy for each class individually and then averaging these accuracies across all classes. Let $k$ denote the number of classes, $p_{ii}$ be the total number of pixels with true class $i$ that are predicted as class $i$, and $p_{ij}$ be the total number of pixels with true class $i$ that are predicted as class $j$. MPA can be calculated using the following formula:
-\begin{equation}
+
+$$
 MPA=\frac{1}{k+1}\sum_{i=0}^{k}\frac{p_{ii}}{\sum_{j=0}^{k}p_{ij}}.
-\end{equation}
+$$
 
 To further evaluate segmentation quality, we also employ the Dice coefficient (Dice), which measures the similarity between the predicted segmentation and the ground truth. Dice is particularly sensitive to class imbalance, making it suitable for IC segmentation where background pixels dominate. Let $TP$, $FP$, and $FN$ represent the number of true positive, false positive, and false negative pixels, respectively. The Dice coefficient is defined as:
-\begin{equation}
+
+$$
 Dice = \frac{2TP}{2TP + FP + FN}.
-\end{equation}
+$$
+
 A higher Dice score indicates better overlap between prediction and ground truth.
 
 In addition, the Aggregated Jaccard Index (AJI) is adopted as a connected-component-based evaluation metric to assess whether circuit segmentation results exhibit short-circuit or open-circuit issues. Unlike mIoU, which measures pixel-level overlap, AJI evaluates the Jaccard similarity across all connected regions, penalizing both over- and under-segmentation. A higher AJI indicates more accurate separation and connection of metal lines and vias, thus better preserving circuit topology.
 Let $G = {G_1, G_2, \dots, G_n}$ and $S = {S_1, S_2, \dots, S_m}$ represent the sets of ground truth and segmented regions, respectively. For each $G_i$, let $S(G_i)$ denote the segmented region with the highest IoU. Then, the AJI is defined as:
-\begin{equation}
+
+$$
 AJI = \frac{\sum_{i=1}^{n} |G_i \cap S(G_i)|}{\sum_{i=1}^{n} |G_i \cup S(G_i)| + \sum_{k \in U} |S_k|},
-\end{equation}
+$$
+
 where $U$ is the set of unmatched segmented instances. A higher AJI value indicates more accurate instance-level correspondence between prediction and ground truth.
 
 
