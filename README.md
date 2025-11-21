@@ -15,6 +15,9 @@ To validate the effectiveness and efficiency of the proposed EAL-ICNet, we condu
 (4) OMV Dataset: To further assess the generalization ability of our model beyond circuit segmentation and its capability in recognizing via structures, we constructed the OMV(Optical Microscope Via) Dataset based on the original OMC dataset. Specifically, 473 images were randomly selected, and pixel-level annotations of via regions were manually provided by engineers. The dataset was split into training, validation, and test subsets in an 8:1:1 ratio to ensure experimental consistency and reliability.
 
 ### Experimental Setup and Implementation Detail
+(2)Implementation Details: To ensure a fair comparison with existing studies, the input size of the HY5SYN dataset was uniformly set to $1024 \times 1024$, while the input sizes of the OMC, MIIC, and OMA datasets were adjusted to $512 \times 512$. It is worth noting that our TSSA module employs eight parallel attention heads. The model was optimized using the Adam optimizer, and all experiments were implemented with the PyTorch deep learning framework on an NVIDIA GeForce RTX 4060 Ti GPU with 16 GB of memory.
+In our experiments, the segmentation results were directly generated as probability maps, and the final binary predictions were obtained by applying a threshold of 0.5. All experiments were randomly conducted three times, and the mean and standard deviation of each evaluation metric were recorded.
+
 
 ### Training Configuration
 
