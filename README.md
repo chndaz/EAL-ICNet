@@ -13,6 +13,8 @@ To validate the effectiveness and efficiency of the proposed EAL-ICNet, we condu
 
 (4) OMV Dataset: To further assess the generalization ability of our model beyond circuit segmentation and its capability in recognizing via structures, we constructed the OMV(Optical Microscope Via) Dataset based on the original OMC dataset. Specifically, 473 images were randomly selected, and pixel-level annotations of via regions were manually provided by engineers. The dataset was split into training, validation, and test subsets in an 8:1:1 ratio to ensure experimental consistency and reliability.
 
+<img width="4116" height="2083" alt="Fig1" src="https://github.com/user-attachments/assets/4cc9625e-eff9-4657-9027-22e28b6b9b81" />
+
 ### Experimental Setup and Implementation Detail
 (1)Baselines: To comprehensively evaluate the effectiveness of the proposed EAL-ICNet, we compare it with a wide range of representative segmentation models, which can be categorized into two groups: lightweight networks and IC segmentation networks.
 
@@ -23,6 +25,7 @@ Finally, our proposed EAL-ICNet further integrates multi-scale feature aggregati
 
 (2)Implementation Details: To ensure a fair comparison with existing studies, the input size of the HY5SYN dataset was uniformly set to $1024 \times 1024$, while the input sizes of the OMC, MIIC, and OMA datasets were adjusted to $512 \times 512$. It is worth noting that our TSSA module employs eight parallel attention heads. The model was optimized using the Adam optimizer, and all experiments were implemented with the PyTorch deep learning framework on an NVIDIA GeForce RTX 4060 Ti GPU with 16 GB of memory.
 In our experiments, the segmentation results were directly generated as probability maps, and the final binary predictions were obtained by applying a threshold of 0.5. All experiments were randomly conducted three times, and the mean and standard deviation of each evaluation metric were recorded.
+
 
 ### Training Configuration
 
@@ -39,6 +42,7 @@ Mean Pixel Accuracy (MPA) improves upon pixel accuracy by computing the pixel ac
 $$
 MPA=\frac{1}{k+1}\sum_{i=0}^{k}\frac{p_{ii}}{\sum_{j=0}^{k}p_{ij}}.
 $$
+
 
 To further evaluate segmentation quality, we also employ the Dice coefficient (Dice), which measures the similarity between the predicted segmentation and the ground truth. Dice is particularly sensitive to class imbalance, making it suitable for IC segmentation where background pixels dominate. Let $TP$, $FP$, and $FN$ represent the number of true positive, false positive, and false negative pixels, respectively. The Dice coefficient is defined as:
 
