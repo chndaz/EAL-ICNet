@@ -61,5 +61,16 @@ $$
 
 where $U$ is the set of unmatched segmented instances. A higher AJI value indicates more accurate instance-level correspondence between prediction and ground truth.
 
+### Loss Function
+In the training phase, the proposed EAL-ICNet is trained with an objective function in an end-to-end manner. The objective function is calculated by the Sorensen-Dice loss and Binary Cross-Entropy function with a pixel-wise soft-max over the final feature maps, which can be expressed as:
+
+$$\begin{gathered}
+\mathcal{L}_{BCE}=\sum_{i=1}^t\left(y_i\log(p_i)+(1-y_i)\log(1-p_i)\right), \\
+\mathcal{L}_{Dice}=1-\frac{\sum_{i=1}^ty_ip_i+\varepsilon}{\sum_{i=1}^ty_i+p_i+\varepsilon}, \\
+\mathcal{L}=\alpha\cdot\mathcal{L}_{BCE}+\beta\cdot\mathcal{L}_{Dice}.
+\end{gathered}$$
+
+where $t$ is the total number of pixels in each image, $y_{i}$ represents the ground-truth value of the $i^{th}$ pixel, and $p_{i}$ is the confidence score of the $i^{th}$ pixel in prediction results. In our experiment, $\alpha=\beta=0.5$, and $\varepsilon=10^{-6}$.
+
 
 
