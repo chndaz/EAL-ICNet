@@ -59,4 +59,3 @@ where $U$ is the set of unmatched segmented instances. A higher AJI value indica
 
 
 
-## Model Architecture
