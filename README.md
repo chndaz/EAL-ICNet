@@ -72,5 +72,15 @@ $$\begin{gathered}
 
 where $t$ is the total number of pixels in each image, $y_{i}$ represents the ground-truth value of the $i^{th}$ pixel, and $p_{i}$ is the confidence score of the $i^{th}$ pixel in prediction results. In our experiment, $\alpha=\beta=0.5$, and $\varepsilon=10^{-6}$.
 
+### Visualization of Each Stage in EAL-ICNet
+
+To better illustrate the segmentation capability of the proposed model, we conducted a comparative analysis against the conventional U-Net architecture. The proposed EAL-ICNet demonstrates a stronger ability to capture long-range feature dependencies and global contextual information, thereby exhibiting remarkable robustness when dealing with complex disturbances such as transmission noise and device decoration noise.
+To further verify the model’s advantage in semantic discrimination, we visualized the feature maps at different encoder stages of both U-Net and EAL-ICNet, as shown in Figure 6. Based on the comparative results, several key observations can be made:
+1. The encoder of U-Net fails to fully exploit global contextual information, as its feature extraction primarily depends on local convolutional receptive fields. Consequently, its feature representations are easily influenced by local noise when facing complex interferences such as transmission and device decoration noise.
+2. In contrast, EAL-ICNet effectively leverages multi-scale contextual information, enabling the generation of more accurate predictions in subsequent stages. From the enlarged feature map patches at the deepest layer, EAL-ICNet produces segmentation results that are more detailed, reliable, and exhibit clearer edge delineation.
+
+Therefore, we can conclude that the semantic representations learned by the proposed method more effectively enhance the segmentation performance of IC images.
+<img width="3918" height="2944" alt="Fig9" src="https://github.com/user-attachments/assets/0fa7f148-cef1-4167-9125-1d045884b8fe" />
+
 
 
