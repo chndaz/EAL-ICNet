@@ -82,5 +82,55 @@ To further verify the model’s advantage in semantic discrimination, we visuali
 Therefore, we can conclude that the semantic representations learned by the proposed method more effectively enhance the segmentation performance of IC images.
 <img width="3918" height="2944" alt="Fig9" src="https://github.com/user-attachments/assets/0fa7f148-cef1-4167-9125-1d045884b8fe" />
 
+# Appendix
+
+### Comparison with Existing IC Image Segmentation Algorithms
+
+| Reference        | Inter-layer Interference Mitigation | Decoration Noise Removal | Lightweight Design | Multi-scale Design | Via Extraction |
+|------------------|------------------------------------|--------------------------|--------------------|--------------------|----------------|
+| Cheng et al.     | ✗                                  | ✓                        | ✗                  | ✗                  | ✓              |
+| Hong et al.      | ✗                                  | ✓                        | ✗                  | ✓                  | ✗              |
+| Yu et al.        | ✓                                  | ✗                        | ✗                  | ✗                  | ✓              |
+| Hsu et al.       | ✗                                  | ✗                        | ✗                  | ✓                  | ✗              |
+| Quijada et al.   | ✓                                  | ✓                        | ✗                  | ✗                  | ✗              |
+| Trindade et al.  | ✓                                  | ✗                        | ✗                  | ✗                  | ✓              |
+| Wilson et al.    | ✓                                  | ✗                        | ✓                  | ✗                  | ✗              |
+| Cheng et al.     | ✗                                  | ✓                        | ✗                  | ✓                  | ✗              |
+| **EAL-ICNet**    | **✓**                              | **✓**                    | **✓**              | **✓**              | **✓**          |
+
+### Ablation Study of the DAB Module on the OMV Dataset
+
+*Bold values indicate the best performance. ✓ indicates that our method is significantly better than the corresponding method according to a paired t-test with 95% confidence.*
+
+| Model        | mIoU            | Dice            | MPA             | AJI             |
+|--------------|------------------|------------------|------------------|------------------|
+| R-DAB1       | 79.35 ± 0.35 ✓   | 73.67 ± 0.22 ✓   | 86.65 ± 0.27 ✓   | 59.74 ± 0.51 ✓   |
+| R-DAB2       | 79.57 ± 0.40 ✓   | 73.70 ± 0.34 ✓   | 86.72 ± 0.27 ✓   | 59.83 ± 0.19 ✓   |
+| **EAL-ICNet**| **80.37 ± 0.67** | **74.86 ± 0.71** | **87.15 ± 0.16** | **60.55 ± 1.03** |
+
+### Ablation Study on the Components of the Dual-Attention Module
+
+| Dataset | Variant        | mIoU            | Dice            | MPA             | AJI             |
+|---------|----------------|------------------|------------------|------------------|------------------|
+| OMC     | **EAL-ICNet**  | **92.92 ± 0.15** | **96.01 ± 0.42** | **96.39 ± 0.57** | **90.46 ± 0.41** |
+| OMC     | O-DC           | 92.31 ± 0.25     | 95.22 ± 0.38     | 95.45 ± 0.30     | 89.69 ± 0.26     |
+| OMC     | O-TSSA         | 92.38 ± 0.48     | 95.65 ± 0.36     | 96.14 ± 0.42     | 90.06 ± 0.30     |
+| OMC     | O-PMA          | 92.50 ± 0.21     | 95.72 ± 0.18     | 96.22 ± 0.39     | 90.18 ± 0.42     |
+| OMV     | **EAL-ICNet**  | **80.37 ± 0.52** | **74.86 ± 0.71** | **87.15 ± 0.16** | **60.99 ± 1.03** |
+| OMV     | O-DC           | 79.17 ± 0.37     | 73.53 ± 0.33     | 86.49 ± 0.23     | 59.66 ± 0.42     |
+| OMV     | O-TSSA         | 79.77 ± 0.46     | 74.09 ± 0.55     | 87.17 ± 0.35     | 60.12 ± 0.60     |
+| OMV     | O-PMA          | 79.85 ± 0.54     | 74.12 ± 0.61     | 87.15 ± 0.47     | 60.24 ± 0.72     |
+
+### Cross-Dataset Generalization Performance
+
+| Training Set                | Test Set | mIoU (%)       | Dice (%)       | MPA (%)        | AJI (%)        |
+|----------------------------|----------|----------------|----------------|----------------|----------------|
+| MIIC + HY5SYN + OMV        | OMC      | 60.99 ± 0.60   | 54.95 ± 0.60   | 72.14 ± 0.60   | 45.14 ± 0.60   |
+| OMC + MIIC + OMV           | HY5SYN   | 78.14 ± 0.15   | 81.18 ± 0.24   | 90.87 ± 0.16   | 68.86 ± 0.20   |
+| OMC + HY5SYN + OMV         | MIIC     | 83.90 ± 0.18   | 86.22 ± 0.14   | 86.76 ± 0.25   | 82.12 ± 0.27   |
+| OMC + MIIC + HY5SYN        | OMV      | 28.65 ± 0.11   | 33.91 ± 0.31   | 39.45 ± 0.42   | 25.63 ± 0.11   |
+
+
+
 
 
