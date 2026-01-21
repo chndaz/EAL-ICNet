@@ -1,6 +1,6 @@
 # EAL-ICNet
 EAL-ICNet, a lightweight segmentation framework, integrates the advantages of both CNNs and Transformers to achieve a strong balance between segmentation accuracy, model compactness, and inference efficiency.
-# Prepare data 
+# Experimental details
 
 ### Dataset descriptions 
 To validate the effectiveness and efficiency of the proposed EAL-ICNet, we conducted comprehensive comparative experiments on circuit segmentation using enterprise-provided datasets, and further evaluated the model’s capability in via detection. In addition, two publicly available IC datasets were employed for broader performance assessment.
